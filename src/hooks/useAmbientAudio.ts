@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
@@ -157,7 +158,7 @@ export const useAmbientAudio = () => {
     if (noiseSourceRef.current) {
       try {
         noiseSourceRef.current.stop();
-      } catch (e) { /* ignore */ }
+      } catch (_) { /* ignore */ }
     }
     
     const noiseBuffer = createNoiseBuffer(audioContextRef.current);
