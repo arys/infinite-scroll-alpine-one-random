@@ -3,31 +3,17 @@
 import { useState, useEffect, useCallback } from 'react';
 import DisclaimerScreen from '../components/DisclaimerScreen';
 import PhraseFeed from '../components/PhraseFeed';
-import { useAmbientAudio } from '../hooks/useAmbientAudio';
 
 type AppState = 'disclaimer' | 'installation' | 'exit';
 
 export default function Home() {
   const [appState, setAppState] = useState<AppState>('disclaimer');
   const [showExitConfirmation, setShowExitConfirmation] = useState(false);
-  
-  const {
-    isPlaying: audioIsPlaying,
-    startAudio,
-    stopAudio
-  } = useAmbientAudio();
 
   // Handle entering the installation
   const handleEnterInstallation = useCallback(async () => {
     setAppState('installation');
-    
-    // Start ambient audio
-    try {
-      await startAudio();
-    } catch (error) {
-      console.warn('Could not start audio:', error);
-    }
-  }, [startAudio]);
+  }, []);
 
   // Handle exit requests
   const handleExitRequest = useCallback(() => {
@@ -36,9 +22,8 @@ export default function Home() {
 
   // Confirm exit
   const confirmExit = useCallback(() => {
-    stopAudio();
     setAppState('exit');
-  }, [stopAudio]);
+  }, []);
 
   // Cancel exit
   const cancelExit = useCallback(() => {
@@ -49,13 +34,6 @@ export default function Home() {
   const handleDecline = useCallback(() => {
     setAppState('exit');
   }, []);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      stopAudio();
-    };
-  }, [stopAudio]);
 
   // Prevent accidental navigation away
   useEffect(() => {
@@ -140,16 +118,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* Audio status indicator */}
-      {appState === 'installation' && (
-        <div className="fixed top-4 left-4 z-40">
-          <div className={`w-3 h-3 rounded-full ${audioIsPlaying ? 'bg-green-500' : 'bg-gray-500'}`}>
-            {audioIsPlaying && (
-              <div className="w-3 h-3 rounded-full bg-green-500 animate-ping"></div>
-            )}
-          </div>
-        </div>
-      )}
+
 
       {/* Main phrase feed */}
       <PhraseFeed onExit={handleExitRequest} />
