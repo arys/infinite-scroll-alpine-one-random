@@ -178,7 +178,7 @@ export default function PhraseFeed({ onExit }: PhraseFeedProps) {
 
   return (
     <div 
-      className={`min-h-screen w-full bg-gradient-to-br ${getThemeColor(currentPhrase.theme)} relative overflow-hidden`}
+      className={`min-h-screen w-full bg-gradient-to-br ${getThemeColor(currentPhrase.theme)} relative overflow-hidden mobile-fullscreen-fixed`}
       style={{ background: `linear-gradient(to bottom right, rgba(0,0,0,${intensityOpacity}), rgba(0,0,0,0.95))` }}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}

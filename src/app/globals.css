@@ -238,18 +238,18 @@ h1, h2, h3 {
 
 /* Mobile-specific styles */
 @media (max-width: 768px) {
-  /* Ensure full screen on mobile */
-  body {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-  
   /* Make touch targets larger */
   .instagram-button {
     min-height: 44px;
     min-width: 44px;
+  }
+  
+  /* Instagram reels-like full screen behavior - apply to specific components */
+  .mobile-fullscreen-fixed {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 }
 
